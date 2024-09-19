@@ -21,6 +21,13 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://npm.pkg.github.com'
           
+      - name: Create .npmrc File
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=\${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          echo "@MANIBATHU:registry=https://npm.pkg.github.com" >> ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install Dependencies
         run: npm install
         
